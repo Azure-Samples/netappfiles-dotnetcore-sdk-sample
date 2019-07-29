@@ -157,8 +157,8 @@ dotnet run
 
 # References
 
-[Azure Active Directory Device Flow Authentication full sample](https://aka.ms/msal-net-device-code-flow)
-[Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
-[Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
-[Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart)
-[Azure NetApp Files documentation](https://docs.microsoft.com/en-us/azure/azure-netapp-files/)
+* [Azure Active Directory Device Flow Authentication full sample](https://aka.ms/msal-net-device-code-flow)
+* [Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
+* [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
+* [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart)
+* [Azure NetApp Files documentation](https://docs.microsoft.com/en-us/azure/azure-netapp-files/)
