@@ -94,7 +94,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
                 ]
             }]
             ```
-        1. Take a note of the ApplicationID value and change the value on `clientID' setting at anf-dotnet-sample\appsettings.json configuration file
+        1. Take a note of the ApplicationID value and change the value on `clientID' setting at anf-dotnetcore-sdk-sample\appsettings.json configuration file
         1. If the user signing-in does not have permissions to consent to these permissions described within the manifest.json file, you should ask your Azure Active Directory Global Admin to apply these permissions for you before executing the console application.
        
             To pre-approve these assignments:
