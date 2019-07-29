@@ -1,13 +1,13 @@
-## [project-title] Changelog
+## [Azure NetAppFiles SDK Sample for .NETCore] Changelog
 
-<a name="x.y.z"></a>
-# x.y.z (yyyy-mm-dd)
+<a name="1.0.0."></a>
+# 1.0.0 (2019-07-29)
 
 *Features*
-* ...
+* Initial commit
 
 *Bug Fixes*
-* ...
+* N/A
 
 *Breaking Changes*
-* ...
+* N/A
