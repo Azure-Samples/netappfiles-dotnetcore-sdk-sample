@@ -6,7 +6,7 @@ products:
   - azure
   - azure-netapp-files
   - dotnet-core
-description: "This project demonstrates how to use a dotnet-core sample application perform CRUD management operations for Microsoft.NetApp resource provider."
+description: "This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider."
 ---
 
 # Azure NetAppFiles SDK Sample for .NETCore
@@ -21,9 +21,9 @@ In this sample application we perform the following operations:
   * Snapshot
   * Volume from Snapshot
 * Updates
-  * Changes a Capacity Pool size from 4TiB to 10TiB
-  * Changes a Volume size from 100GiB to 1TiB
-  * Includes a new NFS export policy to an existing volume
+  * Change a Capacity Pool size from 4TiB to 10TiB
+  * Change a Volume size from 100GiB to 1TiB
+  * Add a new NFS export policy to an existing volume
 * Deletions
   * Snapshots
   * Volumes (including those created from Snapshots)
@@ -32,14 +32,14 @@ In this sample application we perform the following operations:
 
 >Note: the clean up execution is commented out by default, if you want to run this end to end with the clean up, please uncomment related lines at program.cs.
 
-Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resourceso with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).
+Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resources with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).
 
 If you don't already have a Microsoft Azure subscription, you can get a FREE trial account [here](http://go.microsoft.com/fwlink/?LinkId=330212).
 
 ## Prerequisites
 
 1. Azure Subscription
-1. Subscription needs to be whitelisted during the gated GA period for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
+1. Subscription needs to be whitelisted for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
 1. Resource Group created
 1. Virtual Network with a delegated subnet to Microsoft.Netapp/volumes resource. For more information, please refer to [Guidelines for Azure NetApp Files network planning](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-network-topologies)
 1. For this sample console appplication work, we need to authenticate and here we are providing two ways, one that uses service principals (default) or using device code flow authentication.
@@ -114,7 +114,7 @@ Currently, Azure NetApp Files SDK exposes control plane management operations, C
 
 Next, it will move forward to the authentication process, based on what type of authentication you want to use, generating a ServiceClientCredentials (service principal) or TokenCredentials (device flow) both accepted by AzureNetAppFilesManagementClient to create the management client, also used extensively throughout the code.
 
-Then, it will start the CRUD operations by creating the accounts, capacity pools and volumes, in this exact sequence \(for more information about Azure NetApp Files storage hierarchy please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-understand-storage-hierarchy) document\). After all resources are created, it will perform updates to a capacity pool by increasing its size and usage quota of a volume, it will also add an extra export policy to the volume. Snapshot creation and creation of a new volume from this snapshot are the last operations before the clean up process that removes all resources deployed by this application.
+Then, it will start the CRUD operations by creating the accounts, capacity pools and volumes, in this exact sequence \(for more information about Azure NetApp Files storage hierarchy please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-understand-storage-hierarchy) document\). After all resources are created, it will perform an update to a capacity pool by increasing its size; it will perform updates to a volume by changing its size quota and adding an extra export policy. Snapshot creation and creation of a new volume from this snapshot are the last operations before the clean up process that removes all resources deployed by this application.
 
 # How the project is structured
 
