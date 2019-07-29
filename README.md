@@ -6,11 +6,11 @@ products:
   - azure
   - azure-netapp-files
   - dotnet-core
-description: "This project demonstrates how to use a .netcore sample application that shows customers how to perform CRUD management operations for Microsoft.NetApp resource provider."
+description: "This project demonstrates how to use a dotnet-core sample application perform CRUD management operations for Microsoft.NetApp resource provider."
 ---
 
 # Azure NetAppFiles SDK Sample for .NETCore
-This project demonstrates how to use a .netcore sample application that shows customers how to perform CRUD management operations for Microsoft.NetApp resource provider.
+This project demonstrates how to use a dotnet-core sample application perform CRUD management operations for Microsoft.NetApp resource provider.
 
 In this sample application we perform the following operations:
 
@@ -32,7 +32,7 @@ In this sample application we perform the following operations:
 
 >Note: the clean up execution is commented out by default, if you want to run this end to end with the clean up, please uncomment related lines at program.cs.
 
-Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resources, with exception of Volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore some operations are being executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).
+Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resourceso with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).
 
 If you don't already have a Microsoft Azure subscription, you can get a FREE trial account [here](http://go.microsoft.com/fwlink/?LinkId=330212).
 
@@ -42,7 +42,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 1. Subscription needs to be whitelisted during the gated GA period for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
 1. Resource Group created
 1. Virtual Network with a delegated subnet to Microsoft.Netapp/volumes resource. For more information, please refer to [Guidelines for Azure NetApp Files network planning](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-network-topologies)
-1. For this sample console app work we need to authenticate and in this sample application we are providing two ways, one that uses service principals (default) or using device flow authentication.
+1. For this sample console appplication work, we need to authenticate and here we are providing two ways, one that uses service principals (default) or using device code flow authentication.
     1. For Service Principal based authentication
         1. Within an [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart) session, make sure you're logged on at the subscription where you want to be associated with the service principal by default:
             ```bash
@@ -56,6 +56,10 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
             ```bash
             az ad sp create-for-rbac --sdk-auth
             ```
+
+            >![Important]
+            >This command will automatically assign RBAC contributor role to the service principal at subscription level, you can narrow down the scope to the specific resource group where your tests will create the resources.
+
         1. Copy the output content and paste it in a file called azureauth.json and secure it with file system permissions
         1. Set an environment variable pointing to the file path you just created, here is an example with Powershell and bash:
             Powershell 
@@ -71,7 +75,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
         >Note: for more information on service principal authentication with dotnet, please refer to [Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
     1. For device flow authentication
      
-        1. Make sure to comment out service principal authentication code at program.cs file and that all code related to device authentication flow is uncommented and finally that the authentication section of appsettings.json file has the client id and tenant id of the user to be used for device flow authentication.
+        1. Make sure to comment out service principal authentication code at program.cs file and that all code related to device authentication flow is uncommented and finally that the authentication section of appsettings.json file has the client id and tenant id correctly defined.
         1. Create a new application within your Azure Active Directory Tenant:
             ```bash
             az ad app create --display-name anf-sdk-samples --native-app --reply-url http://localhost --required-resource-accesses @manifest.json
@@ -103,14 +107,14 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 
 # What is anf-dotnetcore-sdk-sample.dll doing? 
 
-Currently, Azure NetApp Files SDK exposes control plane management operations, CRUD operations for its resources like accounts, capacity pools, volumes and snapshots. We start this execution by reading a configuration file, called appsettings.json. This file have three sections, one used for authentication if you want to use the device flow authentication (it can be ignored if working with service principal based authentication), the other section (general) has information about subscription and resource group to be used. The last section, called "accounts", where it defines the accounts, capacity pools and volumes. This process will create an object called config that is used extensively throughout the code to reference the resources to be created, updated and deleted.
+Currently, Azure NetApp Files SDK exposes control plane management operations, CRUD operations for its resources like accounts, capacity pools, volumes and snapshots. We start this execution by reading a configuration file (appsettings.json). This file has three sections, one for authentication if you want to use the device code flow authentication (it can be ignored if working with service principal based authentication), the other section (general) has information about subscription and resource group to be used. The last section, (accounts), is the place that defines the accounts, capacity pools and volumes. This process will create a configuration object that is used extensively throughout the code to reference the resources to be created, updated and deleted.
 
 >![Important]
 >Please refer to [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits) to understand ANF's most current limits.
 
-It will move forward to the authentication process based on what type of authentication you want to use, generating a ServiceClientCredentials (service principal) or TokenCredentials (device flow) both accepted by AzureNetAppFilesManagementClient to create the management client, also used extensively throughout the code.
+Next, it will move forward to the authentication process, based on what type of authentication you want to use, generating a ServiceClientCredentials (service principal) or TokenCredentials (device flow) both accepted by AzureNetAppFilesManagementClient to create the management client, also used extensively throughout the code.
 
-Then, it will start the CRUD operations by creating the accounts, capacity pools and volumes, in this exact sequence \(for more information about Azure NetApp Files storage hierarchy please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-understand-storage-hierarchy) link\). Following creating all resources it will perform updates to a capacity pool by increasing its size and a volume, also updating its usage quota and by adding an extra export policy. Snapshot creation and creation of a new volume from this snapshot are the last operations before the clean up process (as previously stated, this part of the code is commented by default) that removes all resources deployed by this application.
+Then, it will start the CRUD operations by creating the accounts, capacity pools and volumes, in this exact sequence \(for more information about Azure NetApp Files storage hierarchy please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-understand-storage-hierarchy) document\). After all resources are created, it will perform updates to a capacity pool by increasing its size and usage quota of a volume, it will also add an extra export policy to the volume. Snapshot creation and creation of a new volume from this snapshot are the last operations before the clean up process that removes all resources deployed by this application.
 
 # How the project is structured
 
@@ -134,12 +138,12 @@ The following table describes all files within this solution:
 
 # How to run the console application
 
-1. Clone locally https://github.com/Azure-Samples/netappfiles-dotnetcore-sdk-sample
+1. Clone it locally
 ```bash
 git clone https://github.com/Azure-Samples/netappfiles-dotnetcore-sdk-sample
 ```
 1. Change folder to .\netappfiles-dotnetcore-sdk-sample\anf-dotnetcore-sdk-sample
-1. Make a copy of  netappfiles-dotnetcore-sdk-sample/\_sample-appsettings.json file, rename it to appsettings.json and modify its contents accordingly (all values between \<\> must be replaced with real values), change the authentication section only if using Device Code flow authentication method.
+1. Make a copy of anf-dotnetcore-sdk-sample/\_sample-appsettings.json file, rename it to appsettings.json and modify its contents accordingly (at minimum, all values between \<\> must be replaced with real values), change the authentication section only if using Device Code flow authentication method.
 1. If using the default service principal authentication flow, make sure you have the azureauth.json and its environment variable with the path to it defined (as previously described)
 1. Build the console application
 ```powershell
