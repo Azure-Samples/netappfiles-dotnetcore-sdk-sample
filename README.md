@@ -10,7 +10,7 @@ description: "This project demonstrates how to use a dotnet-core sample applicat
 ---
 
 # Azure NetAppFiles SDK Sample for .NETCore
-This project demonstrates how to use a dotnet-core sample application perform CRUD management operations for Microsoft.NetApp resource provider.
+This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider.
 
 In this sample application we perform the following operations:
 
@@ -164,3 +164,4 @@ Sample output
 * [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
 * [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart)
 * [Azure NetApp Files documentation](https://docs.microsoft.com/en-us/azure/azure-netapp-files/)
+* [Download Azure SDKs](https://azure.microsoft.com/downloads/)
