@@ -9,6 +9,7 @@ description: "This project demonstrates how to use a dotnet-core sample applicat
 ---
 
 # Azure NetAppFiles SDK Sample for .NETCore
+
 This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider.
 
 In this sample application we perform the following operations:
