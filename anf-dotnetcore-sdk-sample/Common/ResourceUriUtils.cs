@@ -138,11 +138,7 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common
             if (rgindex != -1) //ResourceGroup Name and resourceName passed  is same. Example, resourceGroup Name is "Snapshots" and so is the ResourceName
             {
                 string removedSameRgName = resourceUri.ToLowerInvariant().Split(new[] { rgResourceName.ToLowerInvariant() }, StringSplitOptions.None).Last();
-                int idx = removedSameRgName.IndexOf(resourceName, StringComparison.InvariantCultureIgnoreCase);
-                if (idx != -1)
-                {
-                    return removedSameRgName.Substring(idx + resourceName.Length).Split('/')[1];
-                }
+                return removedSameRgName.Split('/')[1];
             }
 
             int index = resourceUri.IndexOf(resourceName, StringComparison.InvariantCultureIgnoreCase);
