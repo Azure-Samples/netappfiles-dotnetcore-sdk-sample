@@ -4,12 +4,12 @@ languages:
 - csharp
 products:
 - azure
-- azure-netapp-files
 - dotnet-core
 description: "This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider."
 ---
 
 # Azure NetAppFiles SDK Sample for .NETCore
+
 This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider.
 
 In this sample application we perform the following operations:
@@ -39,7 +39,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 ## Prerequisites
 
 1. Azure Subscription
-1. Subscription needs to be whitelisted for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
+1. Subscription needs to be whitelisted for Azure NetApp Files. For more information, please refer to [this](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-register#waitlist) document.
 1. Resource Group created
 1. Virtual Network with a delegated subnet to Microsoft.Netapp/volumes resource. For more information, please refer to [Guidelines for Azure NetApp Files network planning](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-network-topologies)
 1. For this sample console appplication work, we need to authenticate and here we are providing two ways, one that uses service principals (default) or using device code flow authentication.
