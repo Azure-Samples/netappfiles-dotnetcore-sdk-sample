@@ -50,8 +50,6 @@ namespace Microsoft.Azure.Management.ANF.Samples
             // Create capacity pool patch object passing required arguments and the updated size
             CapacityPoolPatch capacityPoolPatch = new CapacityPoolPatch(
                 capacityPool.Location,
-                capacityPool.Id,
-                capacityPool.Id,
                 size: newCapacityPoolSizeBytes);
 
             // Update capacity pool resource
@@ -102,6 +100,7 @@ namespace Microsoft.Azure.Management.ANF.Samples
             List<ExportPolicyRule> ruleList = volume.ExportPolicy.Rules.OrderByDescending(r => r.RuleIndex).ToList();
 
             // Currently, ANF's volume export policy supports up to 5 rules
+            VolumePatchPropertiesExportPolicy exportPoliciesPatch = null;
             if (ruleList.Count <= 4)
             {
                 ruleList.Add(new ExportPolicyRule()
@@ -114,17 +113,25 @@ namespace Microsoft.Azure.Management.ANF.Samples
                     UnixReadOnly = false,
                     UnixReadWrite = true
                 });
+
+                exportPoliciesPatch = new VolumePatchPropertiesExportPolicy() { Rules = ruleList };
             }
 
-            VolumePatchPropertiesExportPolicy exportPoliciesPatch = new VolumePatchPropertiesExportPolicy() { Rules = ruleList };
-
             // Create volume patch object passing required arguments and the updated size
-            VolumePatch volumePatch = new VolumePatch(
-                volume.Location, 
-                volume.Id, 
-                volume.Name, 
-                usageThreshold: newVolumeSizeBytes,
-                exportPolicy: exportPoliciesPatch);
+            VolumePatch volumePatch = null;
+            if (exportPoliciesPatch != null)
+            {
+                volumePatch = new VolumePatch(
+                    volume.Location,
+                    usageThreshold: newVolumeSizeBytes,
+                    exportPolicy: exportPoliciesPatch);
+            }
+            else
+            {
+                volumePatch = new VolumePatch(
+                    volume.Location,
+                    usageThreshold: newVolumeSizeBytes);
+            }
 
             // Update size at volume resource
             try
