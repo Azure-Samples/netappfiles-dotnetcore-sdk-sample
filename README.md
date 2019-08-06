@@ -58,8 +58,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
             az ad sp create-for-rbac --sdk-auth
             ```
 
-            >![Important]
-            >This command will automatically assign RBAC contributor role to the service principal at subscription level, you can narrow down the scope to the specific resource group where your tests will create the resources.
+            >Note: this command will automatically assign RBAC contributor role to the service principal at subscription level, you can narrow down the scope to the specific resource group where your tests will create the resources.
 
         1. Copy the output content and paste it in a file called azureauth.json and secure it with file system permissions
         1. Set an environment variable pointing to the file path you just created, here is an example with Powershell and bash:
@@ -110,8 +109,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
 
 Currently, Azure NetApp Files SDK exposes control plane management operations, CRUD operations for its resources like accounts, capacity pools, volumes and snapshots. We start this execution by reading a configuration file (appsettings.json). This file has three sections, one for authentication if you want to use the device code flow authentication (it can be ignored if working with service principal based authentication), the other section (general) has information about subscription and resource group to be used. The last section, (accounts), is the place that defines the accounts, capacity pools and volumes. This process will create a configuration object that is used extensively throughout the code to reference the resources to be created, updated and deleted.
 
->![Important]
->Please refer to [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits) to understand ANF's most current limits.
+>Note: Please refer to [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits) to understand ANF's most current limits.
 
 Next, it will move forward to the authentication process, based on what type of authentication you want to use, generating a ServiceClientCredentials (service principal) or TokenCredentials (device flow) both accepted by AzureNetAppFilesManagementClient to create the management client, also used extensively throughout the code.
 
