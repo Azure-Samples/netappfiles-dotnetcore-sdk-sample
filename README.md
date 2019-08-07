@@ -115,6 +115,8 @@ Next, it will move forward to the authentication process, based on what type of 
 
 Then, it will start the CRUD operations by creating the accounts, capacity pools and volumes, in this exact sequence \(for more information about Azure NetApp Files storage hierarchy please refer to [this](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-understand-storage-hierarchy) document\). After all resources are created, it will perform an update to a capacity pool by increasing its size; it will perform updates to a volume by changing its size quota and adding an extra export policy. Snapshot creation and creation of a new volume from this snapshot are the last operations before the clean up process that removes all resources deployed by this application.
 
+>Note: This sample does not have a specific retrieve section since we perform gets and lists operations in several places throughout the code.
+
 # How the project is structured
 
 The following table describes all files within this solution:
