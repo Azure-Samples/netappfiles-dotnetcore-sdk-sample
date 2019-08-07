@@ -143,7 +143,7 @@ The following table describes all files within this solution:
     ```powershell
     git clone https://github.com/Azure-Samples/netappfiles-dotnetcore-sdk-sample
     ```
-1. Change folder to **.\netappfiles-dotnetcore-sdk-sample\anf-dotnetcore-sdk-sample**
+1. Change folder to **.\netappfiles-dotnetcore-sdk-sample\src\anf-dotnetcore-sdk-sample**
 1. Make a copy of **anf-dotnetcore-sdk-sample\\_sample-appsettings.json** file, rename it to **appsettings.json** and modify its contents accordingly (at minimum, all values between **\<\>** must be replaced with real values), change the authentication section only if using Device Code flow authentication method.
 1. If using the default service principal authentication flow, make sure you have the azureauth.json and its environment variable with the path to it defined (as previously described)
 1. Build the console application
