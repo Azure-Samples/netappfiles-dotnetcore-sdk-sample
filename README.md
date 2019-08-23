@@ -4,7 +4,6 @@ languages:
 - csharp
 products:
 - azure
-- dotnet-core
 - azure-netapp-files
 description: "This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider."
 ---
