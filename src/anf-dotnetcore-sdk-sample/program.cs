@@ -64,9 +64,9 @@ namespace Microsoft.Azure.Management.ANF.Samples
 
             // WARNING: destructive operations at this point, you can uncomment these lines to clean up all resources created in this example.
             // Deletion operations (snapshots, volumes, capacity pools and accounts)
-            Utils.WriteConsoleMessage($"Waiting for 1 minute to let the snapshot used to create a new volume to complete the split operation therefore not being locked...");
-            System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
-            await Cleanup.RunCleanupTasksSampleAsync(config, anfClient);
+            //Utils.WriteConsoleMessage($"Waiting for 1 minute to let the snapshot used to create a new volume to complete the split operation therefore not being locked...");
+            //System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
+            //await Cleanup.RunCleanupTasksSampleAsync(config, anfClient);
         }
     }
 }
