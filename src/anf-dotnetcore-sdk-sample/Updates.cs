@@ -108,7 +108,7 @@ namespace Microsoft.Azure.Management.ANF.Samples
                     AllowedClients = "10.0.0.4/32",
                     Cifs = false,
                     Nfsv3 = true,
-                    Nfsv4 = false,
+                    Nfsv41 = false,
                     RuleIndex = ruleList.ToList()[0].RuleIndex + 1,
                     UnixReadOnly = false,
                     UnixReadWrite = true
