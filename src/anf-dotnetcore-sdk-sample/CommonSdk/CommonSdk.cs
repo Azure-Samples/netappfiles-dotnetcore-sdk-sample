@@ -139,7 +139,7 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common.Sdk
                         volumeName: parameterList[3],
                         snapshotName: parameterList[4]);
                 }
-                if (typeof(T) == typeof(Volume))
+                else if (typeof(T) == typeof(Volume))
                 {
                     return (T)(object)await client.Volumes.GetAsync(
                         resourceGroupName: parameterList[0],
