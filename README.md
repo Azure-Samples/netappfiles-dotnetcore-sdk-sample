@@ -8,7 +8,7 @@ products:
 description: "This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider."
 ---
 
-# Azure NetAppFiles SDK Sample for .NETCore
+# Azure NetAppFiles SDK Sample for .NET Core
 
 This project demonstrates how to use a dotnet-core sample application to perform CRUD management operations for Microsoft.NetApp resource provider.
 
@@ -32,7 +32,7 @@ In this sample application we perform the following operations:
 
 >Note: the clean up execution is commented out by default, if you want to run this end to end with the clean up, please uncomment related lines at program.cs.
 
-Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resources with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://msdn.microsoft.com/library/hh191443.aspx).
+Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resources with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://docs.microsoft.com/previous-versions/hh191443(v=vs.140)).
 
 If you don't already have a Microsoft Azure subscription, you can get a FREE trial account [here](http://go.microsoft.com/fwlink/?LinkId=330212).
 
@@ -104,7 +104,7 @@ If you don't already have a Microsoft Azure subscription, you can get a FREE tri
                 ![aadconsent](./media/aadconsent.png)
         >Note: for more information on device flow authentication, please refer to [Azure Active Directory Device Flow Authentication full sample](https://aka.ms/msal-net-device-code-flow)
 
-# What is anf-dotnetcore-sdk-sample.dll doing? 
+## What is anf-dotnetcore-sdk-sample.dll doing? 
 
 Currently, Azure NetApp Files SDK exposes control plane management operations, CRUD operations for its resources like accounts, capacity pools, volumes and snapshots. We start this execution by reading a configuration file (appsettings.json). This file has three sections, one for authentication if you want to use the device code flow authentication (it can be ignored if working with service principal based authentication), the other section (general) has information about subscription and resource group to be used. The last section, (accounts), is the place that defines the accounts, capacity pools and volumes. This process will create a configuration object that is used extensively throughout the code to reference the resources to be created, updated and deleted.
 
@@ -116,7 +116,7 @@ Then, it will start the CRUD operations by creating the accounts, capacity pools
 
 >Note: This sample does not have a specific retrieve section since we perform gets and lists operations in several places throughout the code.
 
-# How the project is structured
+## How the project is structured
 
 The following table describes all files within this solution:
 
@@ -136,7 +136,7 @@ The following table describes all files within this solution:
 | Root\CommonSdk | CommonSdk.cs             | Static class dedicated to common operations related to ANF's SDK                                                                                                                                                                                                          |
 | Root\Model     | *                        | Various .cs files that defines objects received from the configuration file or Azure AD Service Principal authentication file                                                                                                                                             |
 
-# How to run the console application
+## How to run the console application
 
 1. Clone it locally
     ```powershell
@@ -157,12 +157,12 @@ The following table describes all files within this solution:
 Sample output
 ![e2e execution](./media/e2e-execution.png)
 
-# References
+## References
 
 * [Azure Active Directory Device Flow Authentication full sample](https://aka.ms/msal-net-device-code-flow)
-* [Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/en-us/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
-* [Resource limits for Azure NetApp Files](https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-resource-limits)
-* [Azure Cloud Shell](https://docs.microsoft.com/en-us/azure/cloud-shell/quickstart)
-* [Azure NetApp Files documentation](https://docs.microsoft.com/en-us/azure/azure-netapp-files/)
+* [Authenticate with the Azure Libraries for .NET](https://docs.microsoft.com/dotnet/azure/dotnet-sdk-azure-authenticate?view=azure-dotnet)
+* [Resource limits for Azure NetApp Files](https://docs.microsoft.com/azure/azure-netapp-files/azure-netapp-files-resource-limits)
+* [Azure Cloud Shell](https://docs.microsoft.com/azure/cloud-shell/quickstart)
+* [Azure NetApp Files documentation](https://docs.microsoft.com/azure/azure-netapp-files/)
 * [Download Azure SDKs](https://azure.microsoft.com/downloads/)
 
