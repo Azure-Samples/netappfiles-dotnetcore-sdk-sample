@@ -54,6 +54,10 @@ namespace Microsoft.Azure.Management.ANF.Samples
                                         async snapshot =>
                                         {
                                             await anfClient.Snapshots.DeleteAsync(config.ResourceGroup, anfAcct.Name, pool.Name, volume.Name, ResourceUriUtils.GetAnfSnapshot(snapshot.Id));
+                                            
+                                            // Adding a final verification if the resource completed deletion since it may have a few secs between ARM Cache the Resource Provider be fully in sync
+                                            await WaitForNoAnfResource<Snapshot>(anfClient, snapshot.Id);
+                                            
                                             Utils.WriteConsoleMessage($"\tDeleted snapshot: {snapshot.Id}");
                                         }).ToList());
                                 }
@@ -86,6 +90,7 @@ namespace Microsoft.Azure.Management.ANF.Samples
                                     try
                                     {
                                         await anfClient.Volumes.DeleteAsync(config.ResourceGroup, anfAcct.Name, pool.Name, ResourceUriUtils.GetAnfVolume(volume.Id));
+                                        await WaitForNoAnfResource<Volume>(anfClient, volume.Id);
                                         Utils.WriteConsoleMessage($"\tDeleted volume: {volume.Id}");
                                     }
                                     catch (Exception ex)
@@ -120,6 +125,7 @@ namespace Microsoft.Azure.Management.ANF.Samples
                             if (anfPool != null)
                             {
                                 await anfClient.Pools.DeleteAsync(config.ResourceGroup, anfAcct.Name, ResourceUriUtils.GetAnfCapacityPool(anfPool.Id));
+                                await WaitForNoAnfResource<CapacityPool>(anfClient, anfPool.Id);
                                 Utils.WriteConsoleMessage($"\tDeleted volume: {anfPool.Id}");
                             }
                         }).ToList());
@@ -142,6 +148,7 @@ namespace Microsoft.Azure.Management.ANF.Samples
                         if (anfAccount != null)
                         {
                             await anfClient.Accounts.DeleteAsync(config.ResourceGroup, anfAccount.Name);
+                            await WaitForNoAnfResource<NetAppAccount>(anfClient, anfAccount.Id);
                             Utils.WriteConsoleMessage($"\tDeleted account: {anfAccount.Id}");
                         }
                     }).ToList());

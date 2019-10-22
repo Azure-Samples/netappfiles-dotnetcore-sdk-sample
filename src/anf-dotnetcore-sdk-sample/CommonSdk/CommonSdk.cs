@@ -314,5 +314,52 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common.Sdk
 
             Console.ResetColor();
         }
+
+        static public async Task WaitForNoAnfResource<T>(AzureNetAppFilesManagementClient client, string resourceId, int intervalInSec = 10, int retries = 60)
+        {
+            for (int i = 0; i <= retries; i++)
+            {
+                System.Threading.Thread.Sleep(TimeSpan.FromSeconds(intervalInSec));
+
+                try
+                {
+                    if (typeof(T) == typeof(Snapshot))
+                    {
+                        var resource = await client.Snapshots.GetAsync(ResourceUriUtils.GetResourceGroup(resourceId),
+                            ResourceUriUtils.GetAnfAccount(resourceId),
+                            ResourceUriUtils.GetAnfCapacityPool(resourceId),
+                            ResourceUriUtils.GetAnfVolume(resourceId),
+                            ResourceUriUtils.GetAnfSnapshot(resourceId));
+                    }
+                    else if (typeof(T) == typeof(Volume))
+                    {
+                        var resource = await client.Volumes.GetAsync(ResourceUriUtils.GetResourceGroup(resourceId),
+                            ResourceUriUtils.GetAnfAccount(resourceId),
+                            ResourceUriUtils.GetAnfCapacityPool(resourceId),
+                            ResourceUriUtils.GetAnfVolume(resourceId));
+                    }
+                    else if (typeof(T) == typeof(CapacityPool))
+                    {
+                        var resource = await client.Pools.GetAsync(ResourceUriUtils.GetResourceGroup(resourceId),
+                            ResourceUriUtils.GetAnfAccount(resourceId),
+                            ResourceUriUtils.GetAnfCapacityPool(resourceId));
+                    }
+                    else if (typeof(T) == typeof(NetAppAccount))
+                    {
+                        var resource = await client.Accounts.GetAsync(ResourceUriUtils.GetResourceGroup(resourceId),
+                            ResourceUriUtils.GetAnfAccount(resourceId));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // The following HResult is thrown if no resource is found
+                    if (ex.HResult == -2146233088)
+                    {
+                        break;
+                    }
+                    throw;
+                }
+            }
+        }
     }
 }
