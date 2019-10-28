@@ -92,7 +92,7 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common.Sdk
                     AllowedClients = rule.AllowedClients,
                     Cifs = rule.Cifs,
                     Nfsv3 = rule.Nfsv3,
-                    Nfsv41 = rule.Nfsv4,
+                    Nfsv41 = rule.Nfsv41,
                     RuleIndex = rule.RuleIndex,
                     UnixReadOnly = rule.UnixReadOnly,
                     UnixReadWrite = rule.UnixReadWrite
@@ -109,7 +109,7 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common.Sdk
                 CreationToken = volume.CreationToken,
                 SubnetId = volume.SubnetId,
                 UsageThreshold = volume.UsageThreshold,
-                ProtocolTypes = new List<string> { "NFSv3" } // If NFS 4.1 is required, use NFSv4.1 value instead, at this moment only one protocol is supported in a single volume
+                ProtocolTypes = new List<string> { "NFSv3" } // If NFS 4.1 is required, use NFSv41 value instead, at this moment only one protocol is supported in a single volume
             };
 
             return await client.Volumes.CreateOrUpdateAsync(volumeBody, resourceGroup, account.Name, pool.Name, volume.Name);

@@ -32,9 +32,9 @@ namespace Microsoft.Azure.Management.ANF.Samples.Model
         public bool? Nfsv3 { get; set; }
 
         /// <summary>
-        /// Gets or sets Nfsv4
+        /// Gets or sets Nfsv41
         /// </summary>
-        public bool? Nfsv4 { get; set; }
+        public bool? Nfsv41 { get; set; }
 
         /// <summary>
         /// Gets or sets UnixReadOnly
