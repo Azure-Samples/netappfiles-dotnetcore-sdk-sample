@@ -6,18 +6,12 @@
 namespace Microsoft.Azure.Management.ANF.Samples.Common
 {
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Net;
+    using System.Text.Json;
     using System.Threading.Tasks;
     using Microsoft.Azure.Management.ANF.Samples.Model;
-    using Microsoft.Identity.Client;
     using Microsoft.Rest;
-    using Microsoft.Rest.Azure;
     using Microsoft.Rest.Azure.Authentication;
-    using Newtonsoft.Json;
 
     /// <summary>
     /// Contains public methods to get configuration settigns, to initiate authentication, output error results, etc.
@@ -31,7 +25,12 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common
         /// <returns>ServiceClientCredentials</returns>
         public static async Task<ServiceClientCredentials> GetServicePrincipalCredential(string authEnvironmentVariable)
         {
-            AzureAuthInfo authSettings = Deserialize<AzureAuthInfo>(Environment.GetEnvironmentVariable(authEnvironmentVariable));
+            var jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+
+            AzureAuthInfo authSettings = JsonSerializer.Deserialize<AzureAuthInfo>(File.ReadAllText(Environment.GetEnvironmentVariable(authEnvironmentVariable)), jsonOptions);
 
             var aadSettings = new ActiveDirectoryServiceSettings
             {
@@ -45,24 +44,6 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common
                 authSettings.ClientId,
                 authSettings.ClientSecret,
                 aadSettings);
-        }
-
-        /// <summary>
-        /// Deserialize json strings
-        /// </summary>
-        /// <typeparam name="T">Type that is used for the deserialization process</typeparam>
-        /// <param name="filePath">Json file path</param>
-        /// <returns>T</returns>
-        public static T Deserialize<T>(string filePath)
-        {
-            var serializer = new JsonSerializer();
-            using (var sr = new StreamReader(filePath))
-            {
-                using (var reader = new JsonTextReader(sr))
-                {
-                    return serializer.Deserialize<T>(reader);
-                }
-            }
         }
     }
 }
