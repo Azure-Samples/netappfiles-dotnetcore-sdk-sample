@@ -40,6 +40,13 @@ namespace Microsoft.Azure.Management.ANF.Samples
             // Authenticating using service principal, refer to README.md file for requirement details
             var credentials = await ServicePrincipalAuth.GetServicePrincipalCredential("AZURE_AUTH_LOCATION");
 
+            //// Authenticating using Device Login flow - uncomment following 4 lines for this type of authentication and
+            //// comment the lines related to service principal authentication, refer to README.md file for requirement details
+            //Console.ForegroundColor = ConsoleColor.Yellow;
+            //AuthenticationResult authenticationResult = await AuthenticateAsync(config.PublicClientApplicationOptions);
+            //TokenCredentials credentials = new TokenCredentials(authenticationResult.AccessToken);
+            //Console.ResetColor();
+
             // Instantiating a new ANF management client
             WriteConsoleMessage("Instantiating a new Azure NetApp Files management client...");
             AzureNetAppFilesManagementClient anfClient = new AzureNetAppFilesManagementClient(credentials) { SubscriptionId = config.SubscriptionId };

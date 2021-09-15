@@ -7,6 +7,7 @@
 # 1.2.0 (2021-09-07)
 *Features*
 * SDKs updated to latest version with some minor code changes
+* Upgraded target framework to NET 5.0 
 * Clean up resources logic were added
 
 *Bug Fixes*

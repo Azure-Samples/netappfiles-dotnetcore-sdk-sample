@@ -30,7 +30,7 @@ In this sample application we perform the following operations:
   * Capacity Pools
   * Accounts
 
->Note: the clean up execution is commented out by default, if you want to run this end to end with the clean up, please uncomment related lines at program.cs.
+>Note: The cleanup execution is disabled by default. If you want to run this end to end with the cleanup, please change value of boolean variable 'shouldCleanup' in program.cs.
 
 Most of these operations are based on asynchronous programming model to demonstrate how to asynchronously manage Azure NetApp Files resources with dotnet-core, except for volume creation and deletion operations that are executed sequentially at the Resource Provider level, therefore these operations are executed sequentially. For more information about asynchronous programming using the Async/Await pattern, see [Asynchronous Programming with Async and Await (C# and Visual Basic)](https://docs.microsoft.com/previous-versions/hh191443(v=vs.140)).
 
