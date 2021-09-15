@@ -109,7 +109,7 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common.Sdk
                 CreationToken = volume.CreationToken,
                 SubnetId = volume.SubnetId,
                 UsageThreshold = volume.UsageThreshold,
-                ProtocolTypes = new List<string> { "NFSv3" } // If NFS 4.1 is required, use NFSv41 value instead, at this moment only one protocol is supported in a single volume
+                ProtocolTypes = new List<string> { volume.Type }
             };
 
             return await client.Volumes.CreateOrUpdateAsync(volumeBody, resourceGroup, account.Name, pool.Name, volume.Name);

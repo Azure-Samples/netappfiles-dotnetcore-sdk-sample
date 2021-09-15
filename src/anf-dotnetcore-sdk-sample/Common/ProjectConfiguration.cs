@@ -40,6 +40,11 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common
         public string ResourceGroup { get; set; }
 
         /// <summary>
+        /// Gets or sets the flag for cleaning up the resources after the creation
+        /// </summary>
+        public bool ShouldCleanUp { get; set; }
+
+        /// <summary>
         /// Reads the configuration from a json file
         /// </summary>
         /// <param name="path">Path to the configuration json file</param>
@@ -67,7 +72,8 @@ namespace Microsoft.Azure.Management.ANF.Samples.Common
 
             config.SubscriptionId = dotnetConfig.GetValue<string>("general:subscriptionId");
             config.ResourceGroup = dotnetConfig.GetValue<string>("general:resourceGroup");
-            
+            config.ShouldCleanUp = dotnetConfig.GetValue<bool>("general:shouldCleanUp");
+
             return config;
         }
     }

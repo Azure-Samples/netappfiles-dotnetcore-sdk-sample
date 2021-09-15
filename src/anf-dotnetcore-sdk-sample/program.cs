@@ -9,7 +9,6 @@ namespace Microsoft.Azure.Management.ANF.Samples
     using System.Threading.Tasks;
     using Microsoft.Azure.Management.ANF.Samples.Common;
     using Microsoft.Azure.Management.NetApp;
-    using Microsoft.Identity.Client;
     using static Microsoft.Azure.Management.ANF.Samples.Common.Utils;
 
     class program
@@ -49,9 +48,9 @@ namespace Microsoft.Azure.Management.ANF.Samples
             //Console.ResetColor();
 
             // Instantiating a new ANF management client
-            Utils.WriteConsoleMessage("Instantiating a new Azure NetApp Files management client...");
+            WriteConsoleMessage("Instantiating a new Azure NetApp Files management client...");
             AzureNetAppFilesManagementClient anfClient = new AzureNetAppFilesManagementClient(credentials) { SubscriptionId = config.SubscriptionId };
-            Utils.WriteConsoleMessage($"\tApi Version: {anfClient.ApiVersion}");
+            WriteConsoleMessage($"\tApi Version: {anfClient.ApiVersion}");
 
             // Creating ANF resources (Account, Pool, Volumes)
             await Creation.RunCreationSampleAsync(config, anfClient);
@@ -62,11 +61,10 @@ namespace Microsoft.Azure.Management.ANF.Samples
             // Performing updates on Capacity Pools and Volumes
             await Updates.RunUpdateOperationsSampleAsync(config, anfClient);
 
-            // WARNING: destructive operations at this point, you can uncomment these lines to clean up all resources created in this example.
-            // Deletion operations (snapshots, volumes, capacity pools and accounts)
-            //Utils.WriteConsoleMessage($"Waiting for 1 minute to let the snapshot used to create a new volume to complete the split operation therefore not being locked...");
-            //System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
-            //await Cleanup.RunCleanupTasksSampleAsync(config, anfClient);
+            if (config.ShouldCleanUp)
+            {
+                await Cleanup.RunCleanupTasksSampleAsync(config, anfClient);
+            }
         }
     }
 }
